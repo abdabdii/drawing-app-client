@@ -15,7 +15,7 @@ export const DrawingCards = ({drawings}) => {
                 <DrawingCard
                 userName={drawing.user.name}
                 userId={drawing.user.id}
-                liked={drawing.likes.includes(drawing.user.id)}
+                liked={drawing.likes.includes(user.id)}
                 likesNumber={drawing.likes.length}
                 image={drawing.drawingImg}
                 drawingId={drawing.id}
