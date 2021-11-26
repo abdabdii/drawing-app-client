@@ -23,6 +23,13 @@ export const saveUser = (user) => {
     }
 }
 
+export const saveImage = (img) => {
+  return {
+      type:'SAVE_IMG',
+      data:img
+  }
+}
+
 export const authUser = (token) => {
     return {
         type:'SAVE_TOKEN',
@@ -38,6 +45,8 @@ const userReducer = (state = initialState(), action) => {
         return {...state, token:action.data}
       case "SINGLE_USER":
           return {...state, singleUser:action.data}
+      case "SAVE_IMG":
+          return {...state, user:{...state.user, image:action.data}, singleUser:{...state.singleUser, image:action.data}}
       default:
         break
     }

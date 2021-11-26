@@ -9,6 +9,7 @@ import { setDone, setPending } from '../../reducers/loadingReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveSingleUser } from '../../reducers/userReducer'
 import { Box } from '@mui/system'
+import { UploadImage } from './UploadImage'
 
 
 export const User = () => {
@@ -44,7 +45,7 @@ export const User = () => {
 
     return (
         <Grid container sx={{flexDirection:'column',width:'97%'}}  spacing={2}>
-            <Grid item sx={{display:'flex',justifyContent:'space-between',margin:'1rem'}}>
+            <Grid item sx={{display:'flex',justifyContent:'space-between',margin:'1rem',alignItems:'center',flexWrap='wrap'}}>
                 
                 {!loading?<Box >
                 <Typography
@@ -56,8 +57,9 @@ export const User = () => {
                     <Avatar src={singleUser.image} variant="outlined" sx={{ my: 1, mx: 1.5 }}/>
                     {`${singleUser.name}'s Gallary`}
                 </Typography>
-                    
+                   
                 </Box>:''}
+                <UploadImage id={id} />
             </Grid>
             <Divider />
             <Gallery drawings={drawings} />

@@ -5,3 +5,14 @@ export const fetchUser = (id) => {
     return axios.get(baseURL + '/users/' + id)
 
 }
+
+
+export const updateUser =  ( token,image,userId) => {
+    
+
+    return axios.put(baseURL + `/users/${userId}`, {
+        image, 
+    },{
+        headers: { Authorization: `Bearer ${token}` }
+    })
+}

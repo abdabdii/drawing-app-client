@@ -5,7 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { authUser } from '../../reducers/userReducer';
+import { authUser, saveUser } from '../../reducers/userReducer';
 
 
 
@@ -18,6 +18,8 @@ export const Header = () => {
     const handleLogout = () => {
       localStorage.clear()
       dispatch(authUser(''))
+      dispatch(saveUser(''))
+
       navigate('/home', {replace:true})
 
     }
