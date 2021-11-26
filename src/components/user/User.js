@@ -33,7 +33,7 @@ export const User = () => {
                 dispatch(setDrawings(response.data))
                 dispatch(saveSingleUser(response.data[0].user))
             } catch(e){
-                alert(`Could not fetch data ${e.message}`)
+                alert(`Could not fetch data Please Draw something to access this page`)
                 dispatch(setDone())
                 navigate('/home', {replace: true})
             }
