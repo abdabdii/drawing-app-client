@@ -46,7 +46,7 @@ export default function Login() {
 
   return (
     <>
-    {!token.length >= 64?
+    {token.length <= 64?
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <Box
