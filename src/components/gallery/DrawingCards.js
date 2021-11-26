@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { DrawingCard } from './DrawingCard'
 
 
-// CustomCard(userName,userId,liked,userImage,image,likesNumber,drawingTitle
 export const DrawingCards = ({drawings}) => {
     let {user} =useSelector((state)=> state.user)
     return (
