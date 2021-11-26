@@ -45,7 +45,7 @@ export const User = () => {
 
     return (
         <Grid container sx={{flexDirection:'column',width:'97%'}}  spacing={2}>
-            <Grid item sx={{display:'flex',justifyContent:'space-between',margin:'1rem',alignItems:'center',flexWrap='wrap'}}>
+            <Grid item sx={{display:'flex',justifyContent:'space-between',margin:'1rem',alignItems:'center',flexWrap:'wrap'}} >
                 
                 {!loading?<Box >
                 <Typography
