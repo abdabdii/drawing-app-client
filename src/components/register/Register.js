@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authenticateUser, registerUser, validateForm } from '../../services/AuthAndRegister';
 import { useNavigate, Link, Navigate } from "react-router-dom";
 import { duplicated } from '../../reducers/errorsReducer';
+import { setDone, setPending } from '../../reducers/loadingReducer';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -33,6 +35,7 @@ const theme = createTheme();
 export default function Register() {
     let navigate = useNavigate()
     const {register} = useSelector((state) => state.errors)
+    const loading = useSelector((state) => state.loading)
     const {token} = useSelector((state) => state.user)
     const dispatch = useDispatch()
   
@@ -41,6 +44,7 @@ export default function Register() {
       event.preventDefault();
       const data = new FormData(event.currentTarget)
       const noError = await validateForm(data, dispatch)
+      dispatch(setPending())
       if(noError){
           try{
             let response = await registerUser({
@@ -51,8 +55,10 @@ export default function Register() {
               if (response.status===200){
                 await authenticateUser(response.data['username'],data.get('password'),dispatch,navigate)
             }
+            dispatch(setDone())
           }catch{
               dispatch(duplicated())
+              dispatch(setDone())
           }
       }
 
@@ -130,8 +136,9 @@ export default function Register() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
             >
-              Sign Up
+              { loading?<CircularProgress sx={{color:'white'}} />:'Sign Up'}
             </Button>
             <Grid container>
               <Grid item>

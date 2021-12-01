@@ -9,6 +9,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticateUser } from '../../services/AuthAndRegister';
 import { Link, useNavigate, Navigate } from "react-router-dom";
+import { CircularProgress } from '@mui/material';
+import { setDone, setPending } from '../../reducers/loadingReducer';
 
 
 
@@ -35,13 +37,16 @@ const theme = createTheme();
 export default function Login() {
   let navigate = useNavigate()
   const {token} = useSelector((state) => state.user)
+  const loading = useSelector((state) => state.loading)
   const dispatch = useDispatch()
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget)
+    dispatch(setPending())
     await authenticateUser(data.get('username'), data.get('password') ,dispatch, navigate)
+    dispatch(setDone())
   };
 
   return (
@@ -91,8 +96,9 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
             >
-              Sign In
+              { loading?<CircularProgress sx={{color:'white'}} />:'Sign In'}
             </Button>
             <Grid container>
               <Grid item>

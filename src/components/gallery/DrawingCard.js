@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { deleteDrawings, updateDrawings } from '../../reducers/drawingsReducer'
@@ -8,10 +8,10 @@ import CustomCard from '../customComponents/CustomCard'
 
 
 // CustomCard(userName,userId,liked,userImage,image,likesNumber,drawingTitle, handleFavorite,handleDelete,handleEdit)
-export const DrawingCard = ({userName,userId,liked,userImage,image,likesNumber,drawingTitle,drawingId,isOwner}) => {
+export const DrawingCard = memo(({userName,userId,liked,userImage,image,likesNumber,drawingTitle,drawingId,isOwner}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    console.log('22');
     const handleDelete = async () => {
         try{
             let response = await deleteDrawing(localStorage.getItem('token'),drawingId)
@@ -42,6 +42,7 @@ export const DrawingCard = ({userName,userId,liked,userImage,image,likesNumber,d
     return (
         <>
             <CustomCard 
+            
             userName={userName}
             userId={userId}
             liked={liked}
@@ -56,4 +57,4 @@ export const DrawingCard = ({userName,userId,liked,userImage,image,likesNumber,d
             /> 
         </>
     )
-}
+})

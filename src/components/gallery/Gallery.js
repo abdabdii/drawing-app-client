@@ -17,7 +17,7 @@ export const Gallery = ({drawings}) => {
             ?
             <DrawingCardsLoading />
             :
-            <DrawingCards drawings={drawings} />
+            <DrawingCards drawings={drawings}  />
            }
             
         </Grid >

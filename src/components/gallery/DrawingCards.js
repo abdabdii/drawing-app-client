@@ -10,7 +10,7 @@ export const DrawingCards = ({drawings}) => {
         <>
         {
             drawings.map((drawing) => 
-            <Grid item xs={11} md={6} lg={4} key={`grid-${drawing.id}`}>
+            <Grid item xs={11} md={6} lg={4} sx={{justifyContent:'center',display:'flex'}}  key={`grid-${drawing.id}`}>
                 <DrawingCard
                 userName={drawing.user.name}
                 userId={drawing.user.id}

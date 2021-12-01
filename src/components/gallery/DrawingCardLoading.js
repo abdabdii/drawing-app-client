@@ -8,7 +8,7 @@ export  function DrawingCardLoading() {
   
 
   return (
-    <Card sx={{ maxWidth: 345, m: 2 }}>
+    <Card sx={{ width: 345, m: 2 }}>
       <CardHeader
         avatar={
           <Skeleton animation="wave" variant="circular" width={40} height={40} />  
