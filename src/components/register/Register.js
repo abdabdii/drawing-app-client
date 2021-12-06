@@ -44,8 +44,9 @@ export default function Register() {
       event.preventDefault();
       const data = new FormData(event.currentTarget)
       const noError = await validateForm(data, dispatch)
-      dispatch(setPending())
+      
       if(noError){
+        dispatch(setPending())
           try{
             let response = await registerUser({
                 username:data.get('username'),
@@ -55,11 +56,12 @@ export default function Register() {
               if (response.status===200){
                 await authenticateUser(response.data['username'],data.get('password'),dispatch,navigate)
             }
-            dispatch(setDone())
+            
           }catch{
               dispatch(duplicated())
-              dispatch(setDone())
+              
           }
+          dispatch(setDone())
       }
 
       
