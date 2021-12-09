@@ -32,9 +32,6 @@ export const Home = () => {
 
 
     return (
-        <>
-                <Gallery drawings={drawings} />
-            
-        </>
+        <Gallery drawings={drawings} />
     )
 }

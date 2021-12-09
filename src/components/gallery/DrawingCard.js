@@ -35,7 +35,7 @@ export const DrawingCard = memo(({userName,userId,liked,userImage,image,likesNum
                 dispatch(updateDrawings(response.data))
             }
         }catch{
-            alert('Could not like drawing')
+            navigate('/login', {replace: true})
         }
     }
     
