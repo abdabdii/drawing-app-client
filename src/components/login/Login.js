@@ -1,16 +1,16 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MatLink from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticateUser } from '../../services/AuthAndRegister';
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import { CircularProgress } from '@mui/material';
+import {  useNavigate, Navigate } from "react-router-dom";
 import { setDone, setPending } from '../../reducers/loadingReducer';
+import { SubmitButton } from '../customComponents/SubmitButton';
+import { LoginSigunpLink } from '../customComponents/LoginSigunpLink';
 
 
 
@@ -37,7 +37,7 @@ const theme = createTheme();
 export default function Login() {
   let navigate = useNavigate()
   const {token} = useSelector((state) => state.user)
-  const loading = useSelector((state) => state.loading)
+ 
   const dispatch = useDispatch()
 
 
@@ -91,24 +91,9 @@ export default function Login() {
             </Typography>:
             null
             }
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              disabled={loading}
-            >
-              { loading?<CircularProgress sx={{color:'white'}} />:'Sign In'}
-            </Button>
-            <Grid container>
-              <Grid item>
-              <Link to="/register" >
-                <Typography  variant="body2">
-                   {"Don't have an account? Sign Up"}
-                 </Typography>
-                </Link>
-              </Grid>
-            </Grid>
+            <SubmitButton  text="Sign In"/>
+            <LoginSigunpLink redirect="/register" text="Don't have an account? Sign Up" />
+            
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
