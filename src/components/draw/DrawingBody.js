@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, CircularProgress, Grid } from '@mui/material'
+import { Button, ButtonGroup, CircularProgress, Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +10,9 @@ import { useNavigate, useParams } from 'react-router'
 import CanvasDraw from 'react-canvas-draw'
 import { fetchDrawing } from '../../services/drawingsServices'
 import { setTitle } from '../../reducers/drawingReducer'
+import Slider from '@mui/material/Slider'
+import { updateBrushSize } from '../../reducers/drawSettingsReducer'
+
 
 
 export const DrawingBody = () => {
@@ -20,7 +23,7 @@ export const DrawingBody = () => {
     const {token, user} = useSelector((state) => state.user)
     const {title } = useSelector((state) => state.drawingTitle)
     const loading = useSelector((state) => state.loading)
-    const color = useSelector((state) => state.color)
+    const {color, brushSize} = useSelector((state) => state.drawSettings)
 
     const {id} = useParams()
     const hasId = id? id.length >3:''
@@ -33,6 +36,11 @@ export const DrawingBody = () => {
 
     const handleUndo = () => {
         canvas.undo()
+    }
+
+    const handleBrushSize = (e) => {
+        let newSize = e.target.value
+        dispatch(updateBrushSize(parseInt(newSize)))
     }
 
     const handleSave = async () => {
@@ -90,19 +98,25 @@ export const DrawingBody = () => {
         <Grid container sx={{width:'100%',justifyContent:'space-evenly',marginTop:'1rem',paddingBottom:'2rem'}} spacing={0.5}>
             <Grid item xs={12} md={3} sx={{display:'flex',flexDirection:'column',alignItems:'center'}}>
                 <ColorPicker  />
+                <Typography variant="h5" component="h5" sx={{marginBlock:'1rem'}}>
+                    Brush Size
+                </Typography>
+                <Slider defaultValue={brushSize} aria-label="Default" valueLabelDisplay="auto" sx={{width:'220px'}} onChange={handleBrushSize} />  
                 <Button sx={{width:'220px',marginY:'1rem'}} onClick={handleSave} variant='contained' color='success' disabled={loading}>
                     {loading?<CircularProgress sx={{color:'white'}} />:'Save'}
                 </Button>
+                
                 <Box sx={{display:'flex',justifyContent:'space-between',width:'220px',marginY:'1rem'}}>
                     <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                        <Button onClick={handleErase}>Erase</Button>
-                        <Button onClick={handleUndo}>Undo</Button>
+                        <Button onClick={handleErase} sx={{width:'110px'}}>Erase</Button>
+                        <Button onClick={handleUndo} sx={{width:'110px'}}>Undo</Button>
                     </ButtonGroup>
                 </Box>
-                        
+                   
             </Grid>
             <Grid item xs={12} md={8}>
             <CanvasDraw
+            brushRadius={brushSize}
             ref={canvasDraw => (canvas = canvasDraw)}
             brushColor={color.hex}
             />

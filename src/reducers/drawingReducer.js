@@ -13,7 +13,8 @@ export const unSetEdit = () => {
    return {type:'UNSET_EDIT'}
 }
 
-const drawingReducer = (state = {title:'Untitled',edit:false}, action) => {
+
+const drawingReducer = (state = {title:'Untitled',edit:false, brushSize:10}, action) => {
     switch(action.type){
       case "SET_TITLE":
         return {...state, title:action.data}

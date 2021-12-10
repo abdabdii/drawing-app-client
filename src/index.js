@@ -4,24 +4,25 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { combineReducers } from 'redux'
 import { createStore } from 'redux'
-import userReducer from './reducers/userReducer';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
 import { Home } from './components/home/Home';
-import errorsReducer from './reducers/errorsReducer';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import { Header } from './components/header/Header';
 import { User } from './components/user/User';
 import { Draw } from './components/draw/Draw';
-import colorReducer from './reducers/colorReducer';
+
+import userReducer from './reducers/userReducer';
+import errorsReducer from './reducers/errorsReducer';
 import drawingReducer from './reducers/drawingReducer';
 import loadingReducer from './reducers/loadingReducer';
 import { Error404 } from './components/error404/Error404';
 import drawingsReducer from './reducers/drawingsReducer';
+import drawSettingsReducer from './reducers/drawSettingsReducer';
 
 
 
@@ -31,7 +32,7 @@ import drawingsReducer from './reducers/drawingsReducer';
 const reducer = combineReducers({
   user:userReducer,
   errors: errorsReducer,
-  color: colorReducer,
+  drawSettings: drawSettingsReducer,
   drawingTitle: drawingReducer,
   loading: loadingReducer,
   drawings:drawingsReducer
